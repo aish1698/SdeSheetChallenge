@@ -1,0 +1,55 @@
+import java.util.* ;
+import java.io.*; 
+/*******************************************************
+
+    Following is the Interval class structure
+
+    class Interval {
+        int start, int finish;
+
+        Interval(int start, int finish) {
+            this.start = start;
+            this.finish = finish;
+        }
+    }
+    
+*******************************************************/
+
+import java.util.List;
+import java.util.ArrayList;
+class merge implements Comparator<Interval>{
+    public int compare(Interval a,Interval b){
+        return a.start-b.start;
+        
+    }
+}
+public class Solution {
+    public static List<Interval> mergeIntervals(Interval[] intervals) {
+        // write your code here.
+        merge mc=new merge();
+        
+        Arrays.sort(intervals,mc);
+        List<Interval> ans=new ArrayList<>();
+        int s=intervals[0].start;
+        int e=intervals[0].finish;
+        int i=1;
+        
+        while(i<intervals.length){
+            int l=intervals[i].start;
+            int r=intervals[i].finish;
+            if(l<=e)
+            {
+                e=Math.max(e,r);
+            }
+            else{
+                ans.add(new Interval(s,e));
+                s=l;
+                e=r;
+            }
+            i++;
+            
+        }
+        ans.add(new Interval(s,e));
+        return ans;
+    }
+}
