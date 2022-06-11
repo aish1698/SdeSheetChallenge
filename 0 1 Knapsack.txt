@@ -1,0 +1,37 @@
+import java.util.ArrayList;
+
+public class Solution {
+    private static int helper(int w,int n,ArrayList<Integer> weights,ArrayList<Integer> values,ArrayList<ArrayList<Integer>> dp){
+        if(w==0||n==0)
+            return 0;
+        int res=0;
+        if(dp.get(n).get(w)!=-1)
+            return dp.get(n).get(w);
+        
+        
+        else if(weights.get(n-1)>w)
+            res=helper(w,n-1,weights,values,dp);
+        else{
+            int take=values.get(n-1)+helper(w-weights.get(n-1),n-1,weights,values,dp);
+        int nottake=helper(w,n-1,weights,values,dp);
+        res=Math.max(take,nottake); 
+        }
+       
+        dp.get(n).set(w,res);
+        return res;
+    }
+	public static int maxProfit(ArrayList<Integer> values, ArrayList<Integer> weights, int n, int w) {
+		// Write your code here.
+        ArrayList<ArrayList<Integer>> dp=new ArrayList<>();
+        for(int i=0;i<=n;i++){
+            ArrayList<Integer> temp=new ArrayList<>();
+            for(int j=0;j<=w;j++){
+              temp.add(j,-1);
+                
+            }
+            dp.add(temp);
+            
+        }
+       return helper(w,n,weights,values,dp);  
+	}
+}
