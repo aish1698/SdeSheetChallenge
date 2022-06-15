@@ -1,0 +1,46 @@
+public class Solution {
+    private static boolean findday(long mid,int time[],int n){
+        long total=0,days=1;
+        for(int i=0;i<time.length;i++){
+            if(time[i]>mid)
+                return false;
+            if(total+time[i]>mid)
+            {
+               days++;
+                total=time[i];
+             } 
+            else{
+              total+=time[i];  
+            }
+        }
+        if(days>n)
+            return false;
+        return true;
+    }
+    public static long ayushGivesNinjatest(int n, int m, int[] time) {
+        
+        // Write your code here.
+        if(time.length<n)
+            return Long.MIN_VALUE;
+        
+        long max=Long.MIN_VALUE,sum=0;
+        for(int i=0;i<time.length;i++){
+            max=Math.max(max,time[i]);
+            sum+=time[i];
+        }
+        long start=max,end=sum;
+        long ans=Long.MAX_VALUE;
+        while(start<=end){
+            long mid=start+(end-start)/2;
+            if(findday(mid,time,n))
+            {
+                ans=mid;
+                end=mid-1;
+            }
+            else{
+             start=mid+1;   
+            }
+        }
+        return ans;
+    }
+}
