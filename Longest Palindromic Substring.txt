@@ -1,0 +1,62 @@
+public class Solution {	
+     privatepublic class Solution {	
+     private static int expand(String s,int l,int r){
+      while(l>=0&&r<s.length()&&s.charAt(l)==s.charAt(r)){
+          l--;
+          r++;
+          
+      }
+      return r-l-1;
+      
+  }
+	public static String longestPalinSubstring(String str) {
+		// Write your code here.
+         if(str==null||str.length()==0)
+            return "";
+        
+      int start=0,end=0,i=0;
+        for(i=0;i<str.length();i++){
+            int odd=expand(str,i,i);
+            int even=expand(str,i,i+1);
+            int actual_len=Math.max(odd,even);
+            if(actual_len>end-start+1){
+                start=i-(actual_len-1)/2;
+                end=i+actual_len/2;
+                
+            }
+            
+        }
+        return str.substring(start,end+1);
+        
+	}
+}
+ static int expand(String s,int l,int r){
+      while(l>=0&&r<s.length()&&s.charAt(l)==s.charAt(r)){
+          l--;
+          r++;
+          
+      }
+      return r-l-1;
+      
+  }
+	public static String longestPalinSubstring(String str) {
+		// Write your code here.
+         if(str==null||str.length()==0)
+            return "";
+        
+      int start=0,end=0,i=0;
+        for(i=0;i<str.length();i++){
+            int odd=expand(str,i,i);
+            int even=expand(str,i,i+1);
+            int actual_len=Math.max(odd,even);
+            if(actual_len>end-start+1){
+                start=i-(actual_len-1)/2;
+                end=i+actual_len/2;
+                
+            }
+            
+        }
+        return str.substring(start,end+1);
+        
+	}
+}
