@@ -1,3 +1,4 @@
+Recursion
 
 public class Solution {
     private static long helper(int n,int v,int denominations[]){
@@ -20,6 +21,45 @@ public class Solution {
         int n=denominations.length;
         
 return helper(n,value,denominations);
+	}
+	
+}
+
+Memoization
+
+
+public class Solution {
+    private static long helper(int n,int v,int denominations[],long dp[][]){
+        if(v==0)
+            return 1;
+        if(v<0)
+            return 0;
+        
+        if(n==0&&v>0)
+            return 0;
+        if(dp[n][v]!=-1)
+            return dp[n][v];
+        
+        long take=helper(n,v-denominations[n-1],denominations,dp);
+        long nottake=helper(n-1,v,denominations,dp);
+        return dp[n][v]=take+nottake;
+        
+        
+    }
+
+	public static long countWaysToMakeChange(int denominations[], int value){
+        //write your code here	
+        int n=denominations.length;
+        long dp[][]=new long[n+1][value+1];
+        for(int i=0;i<=n;i++){
+            for(int j=0;j<=value;j++){
+                dp[i][j]=-1;
+                
+            }
+            
+        }
+        
+return helper(n,value,denominations,dp);
 	}
 	
 }
