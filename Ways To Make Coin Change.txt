@@ -63,3 +63,38 @@ return helper(n,value,denominations,dp);
 	}
 	
 }
+
+Tabulation
+
+
+public class Solution {
+	public static long countWaysToMakeChange(int denominations[], int value){
+        //write your code here	
+        int n=denominations.length;
+        long dp[][]=new long[n+1][value+1];
+        for(int i=0;i<=n;i++){
+            dp[i][0]=1;
+            
+        }
+        for(int j=1;j<=value;j++){
+                dp[0][j]=0;
+                
+            }
+        for(int i=1;i<=n;i++){
+            for(int j=1;j<=value;j++){
+                if(denominations[i-1]>j)
+                {
+                    dp[i][j]=dp[i-1][j];
+                }
+                else{
+                    long take=dp[i][j-denominations[i-1]];
+                    long nottake=dp[i-1][j];
+                    dp[i][j]=take+nottake;
+                }
+            }
+        }
+        
+return dp[n][value];
+	}
+	
+}
