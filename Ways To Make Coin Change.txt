@@ -1,0 +1,25 @@
+
+public class Solution {
+    private static long helper(int n,int v,int denominations[]){
+        if(v==0)
+            return 1;
+        if(v<0)
+            return 0;
+        
+        if(n==0&&v>0)
+            return 0;
+        long take=helper(n,v-denominations[n-1],denominations);
+        long nottake=helper(n-1,v,denominations);
+        return take+nottake;
+        
+        
+    }
+
+	public static long countWaysToMakeChange(int denominations[], int value){
+        //write your code here	
+        int n=denominations.length;
+        
+return helper(n,value,denominations);
+	}
+	
+}
