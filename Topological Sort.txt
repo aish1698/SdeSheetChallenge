@@ -1,0 +1,54 @@
+import java.util.*;
+
+public class Solution 
+{
+    public static ArrayList<Integer> topologicalSort(ArrayList<ArrayList<Integer>> edges, int v, int e) 
+    {
+        // Write your code here
+        ArrayList<Integer> ans=new ArrayList<>(v);
+        ArrayList<ArrayList<Integer>> adj=new ArrayList<>();
+        for(int i=0;i<v;i++)
+        {
+            adj.add(i,new ArrayList());
+            
+        }
+        for(int i=0;i<edges.size();i++){
+            adj.get(edges.get(i).get(0)).add(edges.get(i).get(1));   
+        }
+        int indegree[]=new int[v];
+        for(int i=0;i<v;i++){
+            for(int ver:adj.get(i)){
+                indegree[ver]++;
+                
+            }
+            
+        }
+        Queue<Integer> q=new LinkedList<>();
+        
+        for(int i=0;i<v;i++){
+            if(indegree[i]==0)
+            {
+                q.offer(i);
+            }
+            
+        }
+        while(!q.isEmpty()){
+            int size=q.size();
+            for(int i=0;i<size;i++){
+                Integer temp=q.poll();
+                    ans.add(temp);
+                for(int edge:adj.get(temp)){
+                    indegree[edge]--;
+                    if(indegree[edge]==0)
+                    {
+                        q.offer(edge);
+                    }
+                    
+                }
+                
+            }
+            
+        }
+        return ans;
+    }
+}
