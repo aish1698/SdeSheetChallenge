@@ -21,3 +21,36 @@ public class Solution {
         
 	}
 }
+
+#Memoization
+
+public class Solution {
+    private static int solve(int arr[],int i,int j,int dp[][]){
+        if(i>=j)
+            return 0;
+        if(dp[i][j]!=-1)
+            return dp[i][j];
+        int min=Integer.MAX_VALUE;
+        for(int k=i;k<=j-1;k++){
+            int temp=solve(arr,i,k,dp)+solve(arr,k+1,j,dp)+
+                arr[i-1]*arr[k]*arr[j];
+            min=Math.min(min,temp);
+            
+            
+            
+        }
+        return dp[i][j]=min;
+    }
+	public static int matrixMultiplication(int[] arr , int N) {
+		// Write your code here
+        int dp[][]=new int[102][102];
+        for(int i=0;i<102;i++){
+            for(int j=0;j<102;j++){
+                dp[i][j]=-1;
+                
+            }
+        }
+        return solve(arr,1,N-1,dp);
+        
+	}
+}
