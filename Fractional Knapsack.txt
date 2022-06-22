@@ -1,0 +1,56 @@
+/****************************************************************
+
+    Following is the class structure of the Pair class:
+
+        class Pair
+        {
+        	int weight;
+	        int value;
+	        Pair(int weight, int value)
+	        {
+		        this.weight = weight;
+		        this.value = value;
+	        }
+	        
+        }
+        
+*****************************************************************/
+import java.util.*;
+class cmp implements Comparator<Pair>{
+    public int compare(Pair a,Pair b){
+               double r1=(double)a.value/(double)a.weight;
+               double r2=(double)b.value/(double)b.weight;
+               if(r1<r2)
+                   return 1;
+                else if(r2<r1)
+                    return -1;
+                return 0;
+                
+            }
+}
+public class Solution {
+    public static double maximumValue(Pair[] items, int n, int w) {
+            // Write your code here.
+    	    // ITEMS contains {weight, value} pairs.
+        Arrays.sort(items,new cmp());
+        double curr_cost=0.00;
+        int curr_weight=0;
+        for(int i=0;i<items.length;i++){
+            if(curr_weight+items[i].weight<=w)
+            {
+                curr_weight+=items[i].weight;
+                curr_cost+=(double)items[i].value;
+            }
+           else {
+               int rem_weight=w-curr_weight;
+               curr_cost+=((double)items[i].value/(double)items[i].weight)*(double)rem_weight;
+               break;
+               
+               
+           }
+            
+            
+        }
+        return curr_cost;
+    }
+}
