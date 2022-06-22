@@ -11,10 +11,11 @@ public class Solution {
     }
 	public static ArrayList<ArrayList<Integer>> pwset(ArrayList<Integer> arr) {
 		// WRITE YOUR CODE HERE
-        Collections.sort(arr);
+        //Collections.sort(arr);
         ArrayList<ArrayList<Integer>> ans=new ArrayList<>();
         helper(0,arr,new ArrayList(),ans);
         return ans;
 	}
 }
+
 
