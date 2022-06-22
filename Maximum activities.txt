@@ -1,0 +1,37 @@
+import java.util.*;
+class cmp implements Comparator<time>{
+public int compare(time a,time b)
+    {
+    return a.e-b.e;
+        }
+}
+class time{
+    int s;
+    int e;
+    time(){}
+    time(int s,int e){
+        this.s=s;
+        this.e=e;
+    }
+}
+public class Solution {
+    public static int maximumActivities(List<Integer> start, List<Integer> end) {
+        //Write your code here
+        ArrayList<time> ans=new ArrayList<>();
+        for(int i=0;i<start.size();i++){
+            ans.add(new time(start.get(i),end.get(i)));
+        }
+        Collections.sort(ans,new cmp());
+        int activities=1;
+        int limit=ans.get(0).e;
+        for(int i=1;i<start.size();i++){
+            if(ans.get(i).s>=limit)
+            {
+                activities++;
+                limit=ans.get(i).e;
+            }
+            
+        }
+        return activities;
+    }
+}
