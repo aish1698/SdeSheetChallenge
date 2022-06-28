@@ -1,0 +1,66 @@
+/************************************************************
+
+    Following is the Binary Tree node structure:
+    
+   class TreeNode {
+	    int data;
+	    TreeNode left;
+	    TreeNode right;
+
+	    TreeNode(int data) {
+		    this.data = data;
+		    this.left = null;
+		    this.right = null;
+	    }
+
+    }
+
+************************************************************/
+
+import java.util.*;
+
+public class Solution {
+    private static ArrayList<Integer> ans;
+private static void leftbound(TreeNode root){
+    if(root==null||root.left==null&&root.right==null)
+        return;
+    ans.add(root.data);
+    if(root.left!=null)
+    leftbound(root.left);
+    else
+    leftbound(root.right);
+}
+private static void leaves(TreeNode root){
+    if(root==null)
+        return;
+    if(root.left==null&&root.right==null)
+        ans.add(root.data);
+    leaves(root.left);
+    leaves(root.right);
+}
+private static void rightbound(TreeNode root){
+    if(root==null||root.left==null&&root.right==null)
+        return;
+      if(root.right==null)
+          rightbound(root.left);
+    else 
+        rightbound(root.right);
+    ans.add(root.data);
+}
+	public static ArrayList<Integer> traverseBoundary(TreeNode root){
+		// Write your code here.
+        ans=new ArrayList<>();
+        
+        if(root==null)
+            return new ArrayList();
+        
+        ans.add(root.data);
+        leftbound(root.left);
+        leaves(root.left);
+        leaves(root.right);
+        rightbound(root.right);
+        
+        return ans;
+        
+	}
+}
