@@ -23,14 +23,15 @@ public class Solution {
             return 0;
         int l=solve(root.left);
         int r=solve(root.right);
-        
-        res=Math.max(res,l+r);
+        int temp=Math.max(l,r);
+        int ans=Math.max(temp,l+r);
+        res=Math.max(res,ans);
         
         return 1+Math.max(l,r);
     }
 	public static int diameterOfBinaryTree(TreeNode<Integer> root) {
 		// Write your code here.
-        res=0;
+        res=Integer.MIN_VALUE;
         solve(root);
       return res;
         
