@@ -1,0 +1,32 @@
+import java.util.* ;
+import java.io.*; 
+public class Solution {
+	public static int findMajority(int[] arr, int n) {
+		// Write your code here.
+       int ele=0;
+        int count=0;
+        for(int e:arr){
+            if(count==0)
+            {
+                ele=e;
+            }
+            if(ele==e)
+            {
+                count++;
+            }
+            else{
+                count--;
+            }
+            
+        }
+        count=0;
+        for(int e:arr){
+            if(e==ele)
+            {
+                count++;
+            }
+            
+        }
+        return(count>(int)Math.floor(n/2)?ele:-1);
+	}
+}
