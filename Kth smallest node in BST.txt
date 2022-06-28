@@ -1,0 +1,36 @@
+import java.util.ArrayList;
+
+public class Solution 
+{
+
+    //    Stores the inorder traversal of the tree in "nodes".
+    private static void inorder(TreeNode<Integer> root, ArrayList<Integer> nodes) 
+    {
+        if (root == null) 
+        {
+            
+            return;
+        }
+
+      
+        inorder(root.left, nodes);
+
+        
+        nodes.add(root.data);
+
+
+        inorder(root.right, nodes);
+    }
+
+    public static int kthSmallest(TreeNode<Integer> root, int k) 
+    {
+      
+        ArrayList<Integer> nodes = new ArrayList<Integer>();
+
+        inorder(root, nodes);
+        int n=nodes.size();
+        if(k>n)
+            return -1;
+        return nodes.get(k - 1);
+    }
+}
