@@ -1,0 +1,23 @@
+
+public class Solution {
+	
+	public static long maxSubarraySum(int[] arr, int n) {
+        
+		// write your code here
+        if(arr==null||arr.length==0)
+            return 0;
+        
+       long curr_sum=0,max_sum=0;
+        for(int num:arr){
+            curr_sum+=num;
+            max_sum=Math.max(curr_sum,max_sum);
+            if(curr_sum<0)
+            {
+                curr_sum=0;
+            }
+            
+        }
+        return max_sum;
+	}
+
+}
