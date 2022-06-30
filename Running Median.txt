@@ -1,0 +1,55 @@
+import java.util.*;
+
+public class Solution {
+    private static PriorityQueue<Integer> minheap;
+    private static PriorityQueue<Integer> maxheap;
+private static void insert(int val){
+      if(maxheap.isEmpty()||!maxheap.isEmpty()&&maxheap.peek()>=val)
+            {
+                maxheap.offer(val);
+            }
+            else{
+                minheap.offer(val);
+            }
+             if(maxheap.size()>minheap.size()+1){
+                minheap.offer(maxheap.poll());
+                
+            }
+            else if(maxheap.size()<minheap.size())
+            {
+                maxheap.offer(minheap.poll());
+            }
+}
+    private static void findmid(){
+        if(maxheap.size()==minheap.size())
+            {
+                System.out.print(((maxheap.peek()+minheap.peek())/2)+" ");
+            }
+            else
+                System.out.print(maxheap.peek()+" ");
+    }
+	public static void findMedian(int arr[])  {
+        
+        
+      
+        /* Your class should be named Solution
+		 * Don't write main().
+		 * Don't read input, it is passed as function argument.
+		 * Return output and don't print it.
+	 	 * Taking input and printing output is handled automatically.
+        */
+    minheap=new PriorityQueue<>();
+        
+    maxheap=new PriorityQueue<>(new Comparator<Integer>(){
+        public int compare(Integer a,Integer b){
+            return b-a;
+            
+        }
+    });
+        for(int val:arr)
+        {
+          insert(val);
+          findmid();   
+        }  
+    }
+}
