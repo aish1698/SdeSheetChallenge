@@ -1,0 +1,39 @@
+import java.util.*;
+
+public class Solution {
+    private static boolean helper(HashSet<String> set,String target,int dp[]){
+        int n=target.length();
+        if(n==0)
+        {
+            return true;
+        }
+        if(dp[n]==-1)
+        {
+            dp[n]=0;
+        
+        for(int i=1;i<=target.length();i++){
+            if(set.contains(target.substring(0,i))&&helper(set,target.substring(i),dp))
+            {
+                dp[n]=1;
+                return true;
+            }
+            
+        }
+        }
+    
+       return dp[n]==1; 
+    }
+    public static Boolean wordBreak(String[] arr, int n, String target) {
+        // Write your code here.
+       
+        HashSet<String> set=new HashSet<>();
+        for(String s:arr){
+            set.add(s);
+        }
+        int dp[]=new int[target.length()+1];
+        Arrays.fill(dp,-1);
+        
+        return helper(set,target,dp);
+        
+    }
+}
