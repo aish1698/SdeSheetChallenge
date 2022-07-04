@@ -28,7 +28,7 @@ public class Solution {
         int time=0;
         while(!q.isEmpty()){
             int size=q.size();
-            time++;
+           
             for(int i=0;i<size;i++){
             int arr[]=q.poll();
             int x=arr[0];
@@ -45,7 +45,7 @@ public class Solution {
                 
             }
             }
-            
+           time++;  
         }
         return (fresh==0?time-1:-1);
         
