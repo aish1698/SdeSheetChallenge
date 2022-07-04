@@ -1,0 +1,54 @@
+import java.util.*;
+public class Solution {
+   private static boolean isbound(int grid[][],int r,int c){
+       int n=grid.length;
+       int m=grid[0].length;
+       if(r<0||r>=n||c<0||c>=m)
+           return false;
+       return true;
+       
+   }
+
+	public static int minTimeToRot(int[][] grid, int n, int m) {
+		// Write your code here.
+        int dir[][]={{1,0},{-1,0},{0,-1},{0,1}};
+        int fresh=0;
+        Queue<int[]> q=new LinkedList<>();
+       for(int i=0;i<n;i++){
+           for(int j=0;j<m;j++){
+               if(grid[i][j]==1)
+                   fresh++;
+               else if(grid[i][j]==2)
+                   q.offer(new int[]{i,j});
+               
+           }
+       }
+        if(fresh==0)
+            return 0;
+        int time=0;
+        while(!q.isEmpty()){
+            int size=q.size();
+            time++;
+            for(int i=0;i<size;i++){
+            int arr[]=q.poll();
+            int x=arr[0];
+            int y=arr[1];
+            for(int d[]:dir){
+                int a=d[0]+x;
+                int b=d[1]+y;
+                if(isbound(grid,a,b)&&grid[a][b]==1)
+                {
+                    grid[a][b]=2;
+                    fresh--;
+                    q.offer(new int[]{a,b});
+                }
+                
+            }
+            }
+            
+        }
+        return (fresh==0?time-1:-1);
+        
+	}
+
+}
