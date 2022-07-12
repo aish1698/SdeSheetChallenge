@@ -1,0 +1,48 @@
+/************************************************************
+
+    Following is the TreeNode class structure
+
+    class TreeNode<T>
+    {
+       public:
+        T data;
+        TreeNode<T> left;
+        TreeNode<T> right;
+
+        TreeNode(T data)
+        {
+            this.data = data;
+            left = null;
+            right = null;
+        }
+    };
+
+************************************************************/
+import java.util.*;
+import java.io.*;
+
+public class Solution 
+{
+  private static TreeNode<Integer> helper(TreeNode<Integer> root,int x,int y){
+      if(root==null)
+          return null;
+      if(root.data==x||root.data==y)
+          return root;
+      TreeNode<Integer> left_lca=helper(root.left,x,y);
+      TreeNode<Integer> right_lca=helper(root.right,x,y);
+      
+      if(left_lca!=null&&right_lca!=null)
+          return root;
+      return(left_lca==null?right_lca:left_lca);
+      
+      
+  } 
+    
+    public static int lowestCommonAncestor(TreeNode<Integer> root, int x, int y) 
+    {
+        //    Write your code here.
+        TreeNode<Integer> ans=helper(root,x,y);
+        return ans.data;
+        
+    }
+}
