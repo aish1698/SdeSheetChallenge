@@ -1,0 +1,108 @@
+/*******************************************************
+
+    Following is the BinaryTreeNode class structure:
+
+    class BinaryTreeNode<T> {
+        T data;
+        BinaryTreeNode<T> left;
+        BinaryTreeNode<T> right;
+        
+        public BinaryTreeNode(T data) {
+            this.data = data;
+        }
+    }
+
+*******************************************************/
+import java.util.*;
+public class Solution {
+    
+    public static boolean identicalTrees(BinaryTreeNode<Integer> root1, BinaryTreeNode<Integer> root2) {
+        // Write you code here.       
+//         if(root1==null&&root2==null)
+//             return true;
+//         if(root1==null&&root2!=null||root2==null&&root1!=null)
+//             return false;
+        
+        
+//        Stack<BinaryTreeNode<Integer>> one=new Stack<>();
+//         Stack<BinaryTreeNode<Integer>> two=new Stack<>();
+//         one.push(root1);
+//         two.push(root2);
+//         while(!one.isEmpty()&&!two.isEmpty()){
+//            BinaryTreeNode<Integer> temp1=one.pop();
+//             BinaryTreeNode<Integer> temp2=two.pop();
+//             if(temp1.data!=temp2.data)
+//             {
+//                 return false;
+//             }
+            
+//                 if(temp1.left!=null&&temp2.left!=null)
+//                 {
+//                     one.push(temp1.left);
+//                     two.push(temp2.left);
+//                 }
+//                 else if(temp1.left!=null||temp2.left!=null){
+//                    return false; 
+//                 }
+//                 if(temp1.right!=null&&temp2.right!=null)
+//                 {
+//                     one.push(temp1.right);
+//                     two.push(temp2.right);
+                    
+//                 }
+//                 else if(temp1.right!=null||temp2.right!=null){
+//                     return false;
+//                 }
+//         }
+//         if(!one.isEmpty()||!two.isEmpty()){
+//             return false;
+//         }
+//         return true;
+//         if(root1==null&&root2==null)
+//         return true;
+//         if(root1!=null&&root2==null||root2!=null&&root1==null)
+//         return false;
+//         Stack<BinaryTreeNode<Integer>> st1=new Stack<>();
+//         Stack<BinaryTreeNode<Integer>> st2=new Stack<>();
+//         st1.push(root1);
+//         st2.push(root2);
+//         while(!st1.isEmpty()&&!st2.isEmpty()){
+//             BinaryTreeNode<Integer> temp1=st1.pop();
+//             BinaryTreeNode<Integer> temp2=st2.pop();
+//             if(temp1.data!=temp2.data)
+//             return false;
+//             if(temp1.left!=null&&temp2.left!=null)
+//             {
+//                 st1.push(temp1.left);
+//                 st2.push(temp2.left);
+                
+//             }
+//             else if(temp1.left!=null||temp2.left!=null)
+//             {
+//                 return false;
+                
+//             }
+//             if(temp1.right!=null&&temp2.right!=null){
+//                 st1.push(temp1.right);
+//                 st2.push(temp2.right);
+                
+//             }
+//             else if(temp1.right!=null||temp2.right!=null){
+//                 return false;
+                
+//             }
+            
+//         }
+//         if(!st1.isEmpty()||!st2.isEmpty())
+//         return false;
+//         return true;
+
+        
+               if(root1==null&&root2==null)
+            return true;
+        if(root1==null||root2==null)
+            return false;
+        return((root1.data.equals(root2.data))&&(identicalTrees(root1.left,root2.left))&&identicalTrees(root1.right,root2.right));
+    }
+
+}
