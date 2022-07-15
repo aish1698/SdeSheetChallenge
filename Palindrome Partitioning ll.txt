@@ -1,0 +1,44 @@
+import java.util.*;
+public class Solution {
+  private static boolean is_palindrome(String s,int i,int j){
+        while(i<j){
+            if(s.charAt(i)!=s.charAt(j))
+            {
+                return false;
+            }
+            i++;
+            j--;
+            
+        }
+        return true;
+        
+    }
+    private static int solve(String str,int i,int j,int dp[][]){
+        if(i>=j)
+            return 0;
+        if(is_palindrome(str,i,j))
+            return 0;
+        if(dp[i][j]!=-1)
+            return dp[i][j];
+        int ans=Integer.MAX_VALUE;
+        
+        for(int k=i;k<j;k++){
+            int temp=1+solve(str,i,k,dp)+solve(str,k+1,j,dp);
+            ans=Math.min(ans,temp);
+            
+        }
+        return dp[i][j]=ans;
+    }
+	public static int palindromePartitioning(String str) {
+	    // Write your code here
+        int dp[][]=new int[101][101];
+        for(int a=0;a<101;a++){
+            for(int b=0;b<101;b++){
+                dp[a][b]=-1;
+            }
+        }
+        int i=0,j=str.length()-1;
+        return solve(str,i,j,dp);
+        
+	}
+}
