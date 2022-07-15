@@ -1,0 +1,40 @@
+import java.util.*;
+
+public class Solution {
+    private static ArrayList<Integer> next_largest_left(ArrayList<Integer> price){
+        int n=price.size();
+        Stack<Integer> st=new Stack<>();
+        ArrayList<Integer> ans=new ArrayList<>();
+        for(int i=0;i<n;i++){
+            ans.add(0);    
+        }
+      
+        for(int i=0;i<price.size();i++){
+           
+            while(!st.isEmpty()&&price.get(st.peek())<=price.get(i)){
+                st.pop();
+            }
+            if(st.isEmpty())
+            {
+                ans.set(i,i+1);
+            }
+            else{
+                ans.set(i,i-st.peek());
+            }
+            st.push(i);
+            
+        }
+        return ans;
+        
+    }
+    public static ArrayList<Integer> findSpans(ArrayList<Integer> price) {
+        // Write your code here.
+        if(price==null||price.size()==0)
+            return new ArrayList();
+        return next_largest_left(price);
+        
+    }
+}
+
+
+ 
