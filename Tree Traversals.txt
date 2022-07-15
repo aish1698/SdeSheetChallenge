@@ -1,0 +1,85 @@
+/************************************************************
+
+	Following is the Binary Tree node structure:
+
+	class BinaryTreeNode<T> {
+	    T data;
+	    BinaryTreeNode<T> left;
+	    BinaryTreeNode<T> right;
+
+	    public BinaryTreeNode(T data) {
+	        this.data = data;
+	    }
+	}
+
+************************************************************/
+import java.util.*;
+
+public class Solution {
+    private static List<List<Integer>> res;
+
+    private static void inorder(BinaryTreeNode<Integer> root){
+        if(root==null)
+            return;
+       Stack<BinaryTreeNode<Integer>> st=new Stack<>();
+        ArrayList<Integer> ds=new ArrayList<>();
+        BinaryTreeNode<Integer> curr=root;
+        st.push(curr);
+        curr=curr.left;
+        while(!st.isEmpty()||curr!=null){
+        while(curr!=null){
+            st.push(curr);
+            curr=curr.left;
+            
+        }
+        BinaryTreeNode<Integer> temp=st.pop();
+        ds.add(temp.data);
+        curr=temp.right;
+    }
+        res.add(new ArrayList(ds));
+        
+    }
+    private static void preorder(BinaryTreeNode<Integer> root){
+        if(root==null)
+            return;
+        
+        Stack<BinaryTreeNode<Integer>> st=new Stack<>(); 
+        ArrayList<Integer> ds=new ArrayList<>();
+        
+        st.push(root);
+        while(!st.isEmpty()){
+        BinaryTreeNode<Integer> temp=st.pop();
+            ds.add(temp.data);
+            if(temp.right!=null)
+            st.push(temp.right);
+            if(temp.left!=null)
+                st.push(temp.left);
+            
+            
+        }
+        res.add(new ArrayList(ds));
+        
+    }
+    private static void postorder(BinaryTreeNode<Integer> root, ArrayList<Integer> ds){
+        if(root==null)
+            return;
+        postorder(root.left,ds);
+        postorder(root.right,ds);
+        ds.add(root.data);
+        //Stack<BinaryTreeNode<Integer>> st=new Stack<>();
+       
+        
+    }
+    public static List<List<Integer>> getTreeTraversal(BinaryTreeNode<Integer> root) {
+        // Write your code here.
+        res=new ArrayList<>();
+         ArrayList<Integer> ds=new ArrayList<>();
+        inorder(root);
+        preorder(root);
+        postorder(root,ds);
+        res.add(new ArrayList(ds));
+        return res;
+        
+        
+    }
+}
