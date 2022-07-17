@@ -1,0 +1,25 @@
+import java.util.*;
+public class Kthlargest {
+    private PriorityQueue<Integer> minheap;
+    private int k;
+    Kthlargest(int k, int[] arr) {
+        // Write your code here.
+       minheap=new PriorityQueue<>();
+        this.k=k;
+        for(int num:arr)
+        add(num);
+    }
+
+    void add(int num) {
+        // Write your code here.
+        
+        minheap.offer(num);
+        if(minheap.size()>k)
+            minheap.poll();
+    }
+
+    int getKthLargest() {
+        // Write your code here.
+        return minheap.peek();
+    }
+}
