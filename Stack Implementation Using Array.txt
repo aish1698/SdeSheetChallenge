@@ -1,0 +1,51 @@
+import java.util.*;
+public class Stack {
+    private int arr[];
+    int top;
+    int n;
+    
+    public Stack(int n){
+        this.n=n;
+        top=-1;
+        arr=new int[n];
+        
+        
+    }
+    void push(int num) {
+        // Write your code here.
+        if(top!=n-1){
+    top++;
+        arr[top]=num;
+        }
+    }
+    int pop() {
+        // Write your code here.
+        if(top!=-1){
+        int x=arr[top];
+        top--;
+        return x;
+        }
+        return -1;
+    }
+    int top() {
+        // Write your code here.
+        if(top!=-1)
+        return arr[top];
+        return -1;
+    }
+    int isEmpty() {
+        // Write your code here.
+        if(top==-1)
+            return 1;
+        return 0;
+        
+        
+    }
+    int isFull() {
+        // Write your code here.
+        if(top==n-1)
+            return 1;
+        return 0;
+        
+    }
+}
