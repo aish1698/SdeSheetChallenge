@@ -1,0 +1,46 @@
+import java.util.*;
+public class Solution {
+    public static int atoi(String str) {
+        // Write your code here.
+        if(str.length()==0||str==null)
+            return 0;
+        int res=0;
+    int n=str.length();
+        boolean negative=false;
+        int ind=0;
+    
+        while(ind<n&&str.charAt(ind)==' ')
+        {
+            ind++;
+        }
+        if(ind<n&&str.charAt(ind)=='-'){
+        negative=true;
+            ind++;
+        }    
+        else if(ind<n&&str.charAt(ind)=='+')
+        {
+            ind++;
+        }
+       
+        while(ind<n){
+            if(Character.isDigit(str.charAt(ind))){
+            int num=str.charAt(ind)-'0';
+            res=res*10+num;
+            ind++;
+        }
+            else if(!Character.isDigit(str.charAt(ind)))
+            {
+                ind++;
+            }
+        }
+        if(res==0)
+            return 0;
+        if(negative)
+        {
+            return -1*res;
+        }
+        
+        return res;
+        
+    }
+}
