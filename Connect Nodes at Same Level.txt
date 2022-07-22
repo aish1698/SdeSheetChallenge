@@ -1,0 +1,49 @@
+/*
+    ----------------- Binary Tree node class for reference -----------------
+
+    class BinaryTreeNode<T> {
+	    public T data;
+	    public BinaryTreeNode<T> left;
+	    public BinaryTreeNode<T> right;
+	    public BinaryTreeNode<T> next;
+
+	    BinaryTreeNode(T data) {
+	        this.data = data;
+	        left = null;
+	        right = null;
+	        next = null;
+	    }
+	};
+
+*/
+import java.util.*;
+public class Solution {
+	public static void connectNodes(BinaryTreeNode<Integer> root) {
+    	// Write your code here.
+        if(root==null)
+            return;
+        Queue<BinaryTreeNode<Integer>> q=new LinkedList<>();
+        q.offer(root);
+        while(!q.isEmpty()){
+            int size=q.size();
+            while(size-->0){
+                BinaryTreeNode<Integer> temp=q.poll();
+                
+                if(size==0)
+                {
+                  temp.next=null;  
+                }
+                else{
+                    temp.next=q.peek();
+                }
+                if(temp.left!=null)
+                    q.offer(temp.left);
+                if(temp.right!=null)
+                    q.offer(temp.right);
+                
+                
+            }
+            
+        }
+	}
+}
