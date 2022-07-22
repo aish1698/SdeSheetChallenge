@@ -1,0 +1,72 @@
+/*************************************************************
+    Following is the Binary Tree node structure
+
+	class TreeNode<T> {
+	    public T data;
+	    public TreeNode<T> left;
+	    public TreeNode<T> right;
+
+	    TreeNode(T data) {
+	        this.data = data;
+	        left = null;
+	        right = null;
+	    }
+	}
+
+*************************************************************/
+
+import java.util.*;
+
+public class Solution {
+    private static  ArrayList<Integer> ans;
+    private static BinaryTreeNode<Integer> suc;
+    private static BinaryTreeNode<Integer> pre;
+    private static void helper(BinaryTreeNode<Integer> root, int key){
+     if(root==null)
+         return;
+       
+        if(root.data==key)
+        {
+            if(root.left!=null)
+            {
+             BinaryTreeNode<Integer> t=root.left;
+        while(t.right!=null){
+            t=t.right;
+            
+        }
+                pre=t;
+                
+            }
+            if(root.right!=null)
+            {     
+        BinaryTreeNode<Integer> t=root.right;
+        while(t.left!=null){
+            t=t.left;
+            
+        }
+                suc=t;
+            }
+            ans.add(pre.data);
+            ans.add(suc.data);
+            return;
+            
+        }
+        else if(root.data>key){
+            suc=root;
+        helper(root.left,key);    
+        }
+         else if(root.data<key)
+         {
+             pre=root;
+          helper(root.right,key);   
+         }
+    }
+	public static ArrayList<Integer> predecessorSuccessor(BinaryTreeNode<Integer> root, int key) {
+		// Write your code here.
+       ans=new ArrayList<>();
+        suc=new BinaryTreeNode<Integer>(-1);
+        pre=new BinaryTreeNode<Integer>(-1);
+      helper(root,key);
+        return ans;
+	}
+}
