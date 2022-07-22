@@ -1,0 +1,70 @@
+import java.util.*;
+class Pair{
+    int first;
+    int second;
+    int third;
+    Pair(int first,int second,int third){
+        this.first=first;
+        this.second=second;
+        this.third=third;
+        
+    }
+}
+class cmp implements Comparator<Pair>{
+     public int compare(Pair o1,Pair o2){
+        return o1.first-o2.first;   
+}
+}
+
+public class Solution 
+{
+	public static ArrayList<Integer> mergeKSortedArrays(ArrayList<ArrayList<Integer>> kArrays, int k)
+	{
+		// Write your code here.
+        ArrayList<Integer> res=new ArrayList<>();
+        
+        PriorityQueue<Pair> minheap=new PriorityQueue<Pair>(new cmp());
+        for(int i=0;i<k;i++){
+            minheap.offer(new Pair(kArrays.get(i).get(0),i,0));
+            
+        }
+        while(minheap.size()>0){
+            Pair temp=minheap.poll();
+            int a=temp.second;
+            int b=temp.third;
+            
+            res.add(temp.first);
+            if(b+1<kArrays.get(a).size()){
+                minheap.offer(new Pair(kArrays.get(a).get(b+1),a,b+1));
+            }
+            
+        }
+        return res;
+        
+        
+        
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
