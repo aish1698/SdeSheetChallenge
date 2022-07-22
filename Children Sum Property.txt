@@ -1,0 +1,42 @@
+/*************************************************************
+
+    Following is the Binary Tree node structure
+
+    class BinaryTreeNode < Integer > {
+        int data;
+        BinaryTreeNode < Integer > left;
+        BinaryTreeNode < Integer > right;
+
+    public BinaryTreeNode(int data) {
+            this.data = data;
+        }
+    }
+
+*************************************************************/
+import java.util.*;
+public class Solution {
+    public static void changeTree(BinaryTreeNode < Integer > root) {
+        // Write your code here.
+        if(root==null)
+            return;
+        if(root.left==null&&root.right==null)
+            return;
+        int diff=root.data-((root.left!=null?root.left.data:0)+(root.right!=null?root.right.data:0));
+        if(diff>0)
+        {
+            if(root.left!=null)
+            {
+                root.left.data+=diff;
+            }
+            else if(root.right!=null){
+                root.right.data+=diff;
+            }
+            
+        }
+        changeTree(root.left);
+        changeTree(root.right);
+        root.data=((root.left!=null?root.left.data:0)+(root.right!=null?root.right.data:0));
+        
+        
+    }
+}
