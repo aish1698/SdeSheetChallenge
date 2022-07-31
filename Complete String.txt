@@ -1,0 +1,89 @@
+import java.util.*;
+class Node{
+    Node links[]=new Node[26];
+    boolean flag=false;
+    Node(){}
+    boolean containskey(char ch){
+        return(links[ch-'a']!=null);
+    }
+    void put(char ch,Node node){
+        links[ch-'a']=node;
+    }
+    Node get(char ch){
+        return links[ch-'a'];
+    }
+    void setend(){
+        flag=true;
+    }
+    boolean isend(){
+        return flag;
+    }
+}
+class Trie{
+    Node root;
+    Trie(){
+        root=new Node();
+    }
+    public void insert(String word){
+        Node node=root;
+        
+        for(int i=0;i<word.length();i++){
+            if(!node.containskey(word.charAt(i)))
+            {
+              node.put(word.charAt(i),new Node());  
+            }
+            node=node.get(word.charAt(i));   
+        }
+        node.setend();
+        
+    }
+    public boolean checkifprefixexist(String word){
+        boolean flag=true;
+        Node node=root;
+        for(int i=0;i<word.length();i++){
+            if(node.containskey(word.charAt(i)))
+            {
+                node=node.get(word.charAt(i));
+                flag=flag&node.isend();
+            }
+            else{
+                return false;
+            }
+            
+        }
+        return flag;
+    }
+}
+class Solution {
+
+  public static String completeString(int n, String[] a) {
+    // Write your code here.
+      
+    Trie obj=new Trie();
+      for(String s:a){
+          obj.insert(s);    
+      }
+      String ans="";
+      
+      for(int i=0;i<n;i++){
+          if(obj.checkifprefixexist(a[i]))
+          {
+              if(a[i].length()>ans.length())
+              {
+                  ans=a[i];
+              }
+              else if(a[i].length()==ans.length()&&a[i].compareTo(ans)<0)
+                  
+              {
+                  ans=a[i];
+              }
+          }
+          
+      }
+      if(ans=="")
+      {
+          return "None";
+      }
+      return ans;
+  }
+}
