@@ -1,0 +1,35 @@
+import java.util.*;
+class Node{
+    Node links[]=new Node[26];
+    Node(){}
+    boolean containskey(char ch){
+        return(links[ch-'a']!=null);
+    }
+    void put(char ch,Node node){
+        links[ch-'a']=node;
+    }
+    Node get(char ch){
+        return links[ch-'a'];
+    }
+}
+    
+public class Solution {
+    public static int distinctSubstring(String word) {
+        // Write your code here.
+        int count=0;
+        int n=word.length();
+        Node root=new Node();
+        for(int i=0;i<n;i++){
+            Node node=root;
+            for(int j=i;j<n;j++){
+              if(!node.containskey(word.charAt(j)))
+            {
+             node.put(word.charAt(j),new Node());
+                  count++;
+            }
+             node=node.get(word.charAt(j));
+            }  
+        }
+       return count; 
+    }
+}
