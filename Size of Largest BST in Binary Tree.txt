@@ -1,0 +1,53 @@
+/*************************************************************************
+
+    Following is the class structure of the Node class:
+
+	class TreeNode<T> {
+	    public T data;
+	    public TreeNode<T> left;
+	    public TreeNode<T> right;
+
+	    TreeNode(T data) {
+	        this.data = data;
+	        left = null;
+	        right = null;
+	    }
+	}
+
+*************************************************************************/
+import java.util.*;
+class Node{
+    int max,min,maxsize;
+    Node(int min,int max,int maxsize){
+        this.min=min;
+        this.max=max;
+        this.maxsize=maxsize;
+    }
+}
+
+public class Solution {
+    private static Node helper(TreeNode<Integer> root){
+        if(root==null)
+            return new Node(Integer.MAX_VALUE,Integer.MIN_VALUE,0);
+        if(root.left==null&&root.right==null)
+            return new Node(root.data,root.data,1);
+        
+     Node l=helper(root.left);   
+     Node r=helper(root.right);
+        
+     if(l.max<root.data&&root.data<r.min)
+     {
+         return new Node(Math.min(root.data,l.min),Math.max(root.data,r.max),l.maxsize+r.maxsize+1);
+     }
+        return new Node(Integer.MIN_VALUE,Integer.MAX_VALUE,Math.max(l.maxsize,r.maxsize));
+        
+    
+}
+
+	public static int largestBST(TreeNode<Integer> root) {
+		// Write your code here.
+        
+        return helper(root).maxsize;
+        
+	}
+}
