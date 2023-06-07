@@ -1,21 +1,32 @@
-import java.util.* ;
-import java.io.*; 
+class Solution {
+     List<List<Integer>> res;
+    public List<List<Integer>> generate(int numRows) {
+        res=new ArrayList<>();
+        if(numRows==0)
+        return res;
+      
+       for(int row=1;row<=numRows;row++)
+       {
+          generateRow(row);
 
-public class Solution {
-	public static ArrayList<ArrayList<Long>> printPascal(int n) {
-                 // Write your code here.
-        ArrayList<ArrayList<Long>> ans=new ArrayList<>();
-        for(int i=0;i<n;i++){
-            ArrayList<Long> arr=new ArrayList<>();
-            for(int j=0;j<=i;j++){
-                if(j==0||j==i)
-                    arr.add(1L);
-                else{
-                    arr.add(ans.get(i-1).get(j)+ans.get(i-1).get(j-1));
-                }
-            }
-            ans.add(arr);
-        }
-        return ans;
-	}
+       }
+       return res;
+
+    }
+    void generateRow(int n){
+         List<Integer> temp=new ArrayList<>();
+           temp.add(1);
+
+           long ans=1;
+
+
+
+           for(int col=1;col<n;col++){
+               ans=ans*(n-col);
+               ans=ans/col;
+               temp.add((int)(ans));
+           }
+           res.add(temp);
+
+    }
 }
